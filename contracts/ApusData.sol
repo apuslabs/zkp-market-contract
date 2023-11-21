@@ -42,6 +42,8 @@ library ApusData {
         bytes result;
         rewardInfo reward;
         uint64 expiry;
+        uint256 assignTime;
+        uint256 proveTime;
     }
 
 

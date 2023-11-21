@@ -11,6 +11,30 @@ contract Market {
 
     ApusData.ClientConfig [] public clients;
 
+    function getClientCount() public view returns(uint256){
+        return clients.length;
+    }
+
+    function getAvilableClientCount() public view returns(uint256){
+        uint256 count = 0;
+        for(uint i = 0; i < clients.length; i++) {
+            if(clients[i].curInstance < clients[i].maxZkEvmInstance) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    function getUserClients(address owner) public view returns(ApusData.ClientConfig[] memory){
+        ApusData.ClientConfig[] memory userClients;
+        for(uint i = 0; i < clients.length; i++) {
+            if(clients[i].owner == owner) {
+                userClients.push(clients[i]);
+            }
+        }
+        return userClients;
+    }
+
 
     // function get() public view returns(uint256){
     //     uint256 count = 5;
