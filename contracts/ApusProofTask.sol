@@ -55,20 +55,36 @@ contract ApusProofTask {
     }
 
     function getProverTasks(address prover) public view returns(ApusData.Task[] memory){
-        ApusData.Task[] memory proverTasks;
+        uint count = 0;
         for(uint i = 0; i < tasks.length; i++) {
             if(tasks[i].assigner == prover) {
-                proverTasks.push(tasks[i]);
+                count++;
+            }
+        }
+        ApusData.Task[] memory proverTasks = new ApusData.Task[](count);
+        count = 0;
+        for(uint i = 0; i < tasks.length; i++) {
+            if(tasks[i].assigner == prover) {
+                proverTasks[count] = tasks[i];
+                count++;
             }
         }
         return proverTasks;
     }
 
     function getClientTasks(address prover, uint256 clientId) public view returns(ApusData.Task[] memory){
-        ApusData.Task[] memory clientTasks;
+        uint count = 0;
         for(uint i = 0; i < tasks.length; i++) {
             if(tasks[i].assigner == prover && tasks[i].clientId == clientId) {
-                clientTasks.push(tasks[i]);
+                count++;
+            }
+        }
+        ApusData.Task[] memory clientTasks = new ApusData.Task[](count);
+        count = 0;
+        for(uint i = 0; i < tasks.length; i++) {
+            if(tasks[i].assigner == prover && tasks[i].clientId == clientId) {
+                clientTasks[count] = tasks[i];
+                count++;
             }
         }
         return clientTasks;
@@ -80,7 +96,7 @@ contract ApusProofTask {
                 require(tasks[i]._stat == ApusData.TaskStatus.Assigned);
                 tasks[i]._stat = ApusData.TaskStatus.Done;
                 tasks[i].result = result;
-                task[i].proveTime = block.timestamp;
+                tasks[i].proveTime = block.timestamp;
                 market.getProverConfig(tasks[i].assigner, tasks[i].clientId);
                 market.releaseTaskToClient(tasks[i].assigner, tasks[i].clientId);
                 token.reward(tasks[i].assigner);
@@ -90,7 +106,7 @@ contract ApusProofTask {
     }
 
     ApusData.rewardInfo  emptyRewardInfo = ApusData.rewardInfo(address(0), 0);
-    ApusData.Task emptyTask = ApusData.Task(0, 0, 0, address(0), new bytes(0), ApusData.TaskType.TaikoZKEvm, ApusData.TaskStatus.Posted, new bytes(0), emptyRewardInfo, 0);
+    ApusData.Task emptyTask = ApusData.Task(0, 0, 0, address(0), new bytes(0), ApusData.TaskType.TaikoZKEvm, ApusData.TaskStatus.Posted, new bytes(0), emptyRewardInfo, 0, 0, 0);
     ApusData.ClientConfig emptyClientConfig = ApusData.ClientConfig(address(0), 0, "", 0, 0, 0, ApusData.ClientStatus.Running);
 
     function getTask(ApusData.TaskType _tp, uint256 uniqID) public view returns(ApusData.Task memory, ApusData.ClientConfig memory){
@@ -113,7 +129,7 @@ contract ApusProofTask {
             }
         }
 
-        tasks.push(ApusData.Task(tasks.length + 1, 0, uniqID, address(0), input, _tp, ApusData.TaskStatus.Posted, new bytes(0), ri, expiry));
+        tasks.push(ApusData.Task(tasks.length + 1, 0, uniqID, address(0), input, _tp, ApusData.TaskStatus.Posted, new bytes(0), ri, expiry, block.timestamp, 0));
         emit eventPostTask(_tp, uniqID, input);
     }
 

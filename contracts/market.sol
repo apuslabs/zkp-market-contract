@@ -26,10 +26,18 @@ contract Market {
     }
 
     function getUserClients(address owner) public view returns(ApusData.ClientConfig[] memory){
-        ApusData.ClientConfig[] memory userClients;
+        uint count = 0;
         for(uint i = 0; i < clients.length; i++) {
             if(clients[i].owner == owner) {
-                userClients.push(clients[i]);
+                count++;
+            }
+        }
+        ApusData.ClientConfig[] memory userClients = new ApusData.ClientConfig[](count);
+        count = 0;
+        for(uint i = 0; i < clients.length; i++) {
+            if(clients[i].owner == owner) {
+                userClients[count] = clients[i];
+                count++;
             }
         }
         return userClients;
