@@ -10,6 +10,7 @@ from scripts.conn import *
 
 none_address = '0x0000000000000000000000000000000000000000'
 
+
 def gen_client_config(owner, client_id, url, max_instance, min_fee):
     return {
         'owner': owner,
@@ -133,7 +134,6 @@ if __name__ == '__main__':
     # create_client()
     # creat_client_2()
     # print(connector.market_dispatch(role.provider, '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390', 170073054677)['status'])
-    # print(connector.getLowestN())
     # print(connector.has_resource())
     # submit_task()
     # v = connector.get_task_by_index(43)

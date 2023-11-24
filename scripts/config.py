@@ -42,9 +42,9 @@ public_to_private_keys = {
 
 
 class _role:
-    _contract_owner = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
-    _provider = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
-    _user = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
+    _contract_owner = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
+    _provider = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
+    _user = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
 
     @classmethod
     def private_key(cls, public_key):
@@ -71,7 +71,7 @@ def get_config(fileName):
 
 market_contract_address, market_abi = get_config("Market.json")
 apus_task_address, apus_task_abi = get_config('ApusProofTask.json')
-# apus_task_address = env['APUS_TASK_CONTRACT_ADDRESS']
+# market_contract_address = env['APUS_TASK_CONTRACT_ADDRESS']
 
 __all__ = ['role', 'url', 'chain_id', 'gas_limit', 'market_contract_address', 'market_abi', 'apus_task_address', 'apus_task_abi']
 
