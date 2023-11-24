@@ -8,27 +8,43 @@ url = 'http://1.117.58.173:8545'
 chain_id = 1337
 gas_limit = 1000000  # 您可能需要根据合约函数的复杂性和资源消耗进行调整
 
+env = dict()
+with open(".env", "r") as file:
+    for line in file:
+        line = line.strip()
+        if line and not line.startswith("#"):
+            key, value = line.split("=")
+            env[key.strip()] = value.strip()
+
+url = env['APUS_RPC']
+chain_id = int(env['APUS_CHAIN_ID'])
+gas_limit = int(env['GAS_LIMIT'])
+
 public_to_private_keys = {
-    '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390' :'0x91c6c377cc072cd187fed1caaa6527896f58f10cb20667235c87b07c64b33955'
+    '0x69CEa2D018195c23C71C52DACf986b5d43fFD574' :'9ce6e45a8a38a7c9b5faecbffdcb463a86817d26be2a3f3d9bed339eebf058a3'
 }
 
-# Sepolia
-url = 'https://eth-sepolia.g.alchemy.com/v2/j1yrdLvznv5AQ5NfphKOQZsFDU7-Jc8W'
-chain_id = 11155111
+# # Sepolia
+# url = 'https://eth-sepolia.g.alchemy.com/v2/j1yrdLvznv5AQ5NfphKOQZsFDU7-Jc8W'
+# chain_id = 11155111
+#
+# # opBNB test_net
+# url = 'https://opbnb-testnet-rpc.bnbchain.org'
+# chain_id = 5611
+#
+# # Scroll Sepolia
+# url = 'https://sepolia-rpc.scroll.io'
+# chain_id = 534351
 
-# opBNB test_net
-url = 'https://opbnb-testnet-rpc.bnbchain.org'
-chain_id = 5611
-
-public_to_private_keys = {
-    '0x122b93Ff43d17D6f8D93fB1dEa6faDac20489fA9' :'88d57d52b4eedc76ca40bd52bc36c16795d61972ec8ff530ad74dc9bcd17299a'
-}
+# public_to_private_keys = {
+#     '0xe8fa1Dc4d23c54C3C03fcF25EECa7E0Ff882a75e' :'6e84d87f7029357a2c236ddca1f5ec4fc289fff0ff06c70a1e5500e6a22b48b0'
+# }
 
 
 class _role:
-    _contract_owner = '0x122b93Ff43d17D6f8D93fB1dEa6faDac20489fA9'
-    _provider = '0x122b93Ff43d17D6f8D93fB1dEa6faDac20489fA9'
-    _user = '0x122b93Ff43d17D6f8D93fB1dEa6faDac20489fA9'
+    _contract_owner = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
+    _provider = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
+    _user = '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390'
 
     @classmethod
     def private_key(cls, public_key):
@@ -55,6 +71,7 @@ def get_config(fileName):
 
 market_contract_address, market_abi = get_config("Market.json")
 apus_task_address, apus_task_abi = get_config('ApusProofTask.json')
+# apus_task_address = env['APUS_TASK_CONTRACT_ADDRESS']
 
 __all__ = ['role', 'url', 'chain_id', 'gas_limit', 'market_contract_address', 'market_abi', 'apus_task_address', 'apus_task_abi']
 
