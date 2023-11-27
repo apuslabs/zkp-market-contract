@@ -20,6 +20,24 @@ contract ApusProofTask {
         token = ERC20(_tokenAddr);
     }
 
+
+    function getDailyTaskCount(uint numDays) public view returns (uint256[] memory) {
+        require(numDays > 0, "Number of days must be greater than 0");
+        uint256[] memory dailyTaskCount = new uint256[](numDays);
+        uint256 today = block.timestamp / 1 days;
+
+        for (uint i = 0; i < tasks.length; i++) {
+            uint256 taskDay = tasks[i].assignTime / 1 days;
+            uint256 dayDiff = today - taskDay;
+
+            if (dayDiff < numDays) {
+                dailyTaskCount[dayDiff] += 1;
+            }
+        }
+
+        return dailyTaskCount;
+    }
+
     function getTaskCount() public view returns(uint256){
         return tasks.length;
     }
