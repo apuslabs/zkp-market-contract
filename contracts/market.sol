@@ -12,7 +12,11 @@ contract Market {
     ApusData.ClientConfig [] public clients;
 
     function getClientCount() public view returns(uint256){
-        return clients.length;
+        uint256 total = 0;
+        for(uint i = 0; i < clients.length; i++) {
+            total += clients[i].maxZkEvmInstance;
+        }
+        return total;
     }
 
     function getAvilableClientCount() public view returns(uint256){

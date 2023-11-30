@@ -67,10 +67,14 @@ contract ApusProofTask {
 
     function getAvgProofTime() public view returns(uint256){
         uint256 total = 0;
+        uint256 count = 0;
         for(uint i = 0; i < tasks.length; i++) {
-            total += tasks[i].proveTime - tasks[i].assignTime;
+            if (tasks[i]._stat == ApusData.TaskStatus.Done && tasks[i].proveTime > 0) {
+                total += tasks[i].proveTime - tasks[i].assignTime;
+                count++;
+            }
         }
-        return total / tasks.length;
+        return total / count;
     }
 
     function getProverTasks(address prover) public view returns(ApusData.Task[] memory){
