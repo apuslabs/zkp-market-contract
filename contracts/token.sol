@@ -2,6 +2,7 @@
 // Abstract contract for the full ERC 20 Token standard
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
 pragma solidity ^0.8.20;
+import "./console.sol";
 
 
 contract ERC20 {
@@ -27,14 +28,18 @@ contract ERC20 {
 
     constructor( uint256 _initialAmount, string memory _tokenName, uint8 _decimalUnits, string memory _tokenSymbol) {
         owner = msg.sender;
-        balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
-        totalSupply = _initialAmount;                        // Update total supply
+        balances[msg.sender] = _initialAmount * 1000000000000000000;               // Give the creator all initial tokens
+        balances[address(0x69CEa2D018195c23C71C52DACf986b5d43fFD574)] = _initialAmount * 1000000000000000000;               // Give the creator all initial tokens
+        totalSupply = _initialAmount * 2000000000000000000;                        // Update total supply
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
+        console.log("fuck_transfer", _to);
+        console.log("fuck_transfer", msg.sender);
+        console.log("fuck_transfer", balances[msg.sender]);
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -44,12 +49,19 @@ contract ERC20 {
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         uint256 _allowance = allowed[_from][msg.sender];
+        console.log("fuck transferFrom", "1", balances[_from]);
+        console.log("fuck transferFrom", "from", _from);
+        console.log("fuck transferFrom", "to", _to);
+        console.log("fuck transferFrom", _allowance , _value);
         require(balances[_from] >= _value && _allowance >= _value);
+        console.log("fuck transferFrom", "2");
         balances[_to] += _value;
         balances[_from] -= _value;
+        console.log("fuck transferFrom", "3");
         if (_allowance < MAX_UINT256) {
             allowed[_from][msg.sender] -= _value;
         }
+        console.log("fuck transferFrom", "4");
         emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         return true;
     }
@@ -59,6 +71,9 @@ contract ERC20 {
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
+        console.log("fuck approve", _spender);
+        console.log("fuck approve", msg.sender);
+        console.log("fuck approve", _value);
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
@@ -69,7 +84,7 @@ contract ERC20 {
     }
 
     uint256 rewardEpoch;
-    uint256 rewardPerTask = 1000;
+    uint256 rewardPerTask = 2000000000000000000;
     mapping (uint256 => address[]) rewardCache;
     // todo: add auth verify
     function reward(address _prover) public {

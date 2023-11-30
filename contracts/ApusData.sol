@@ -50,6 +50,6 @@ library ApusData {
 
     enum ClientStatus {Running, Stopped}
     enum TaskType {TaikoZKEvm}
-    enum TaskStatus {Posted, Assigned, Done, Slashed}
+    enum TaskStatus {Posted, Assigned, Done, Payed, Slashed}
     
 }

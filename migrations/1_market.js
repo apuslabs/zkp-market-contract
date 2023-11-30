@@ -28,6 +28,7 @@ module.exports = function(deployer) {
         const directoryPath = path.join(__dirname, '../', 'build', 'contract_address');
         const marketPath = path.join(directoryPath, 'Market.json');
         const taskPath = path.join(directoryPath, 'ApusProofTask.json');
+        const erc20Path = path.join(directoryPath, 'ERC20.json');
         // 创建目录
         if (!fs.existsSync(directoryPath)) {
             fs.mkdirSync(directoryPath, { recursive: true });
@@ -35,6 +36,7 @@ module.exports = function(deployer) {
 
         fs.writeFileSync(marketPath, JSON.stringify({address: MarketContract.networks[deployer.network_id].address}, null, 2));
         fs.writeFileSync(taskPath, JSON.stringify({address: TaskContract.networks[deployer.network_id].address}, null, 2));
+        fs.writeFileSync(erc20Path, JSON.stringify({address: TokenContract.networks[deployer.network_id].address}, null, 2));
         // console.log(`Contract address saved to ${filePath}`);
     });
 };

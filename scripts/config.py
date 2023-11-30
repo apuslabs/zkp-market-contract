@@ -36,8 +36,13 @@ public_to_private_keys = {
 # url = 'https://sepolia-rpc.scroll.io'
 # chain_id = 534351
 
+# Taiko Jolnir
+# url = 'https://rpc.jolnir.taiko.xyz'
+# chain_id = 167007
+#
+#
 # public_to_private_keys = {
-#     '0xe8fa1Dc4d23c54C3C03fcF25EECa7E0Ff882a75e' :'6e84d87f7029357a2c236ddca1f5ec4fc289fff0ff06c70a1e5500e6a22b48b0'
+#     '0x863c9b8159B3F95687a600B1b21aE159618b31b1': '082994a2939818f4d539c7704cdd64a8ba20caf326b2cf731db5b2249c18c985'
 # }
 
 
@@ -71,9 +76,12 @@ def get_config(fileName):
 
 market_contract_address, market_abi = get_config("Market.json")
 apus_task_address, apus_task_abi = get_config('ApusProofTask.json')
+token_address, token_abi = get_config('ERC20.json')
+print("market address", market_contract_address)
+print("task_address", apus_task_address)
 # market_contract_address = env['APUS_TASK_CONTRACT_ADDRESS']
 
-__all__ = ['role', 'url', 'chain_id', 'gas_limit', 'market_contract_address', 'market_abi', 'apus_task_address', 'apus_task_abi']
+__all__ = ['role', 'url', 'chain_id', 'gas_limit', 'market_contract_address', 'market_abi', 'apus_task_address', 'apus_task_abi', 'token_abi']
 
 if __name__ == '__main__':
     print(role.provider.public_key)

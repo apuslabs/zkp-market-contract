@@ -113,7 +113,8 @@ contract Market {
                     clients[i].curInstance += 1;  // Assigning a task to the client
                     return true;
                 }
-                return false;  // The client can't take more tasks
+                // return false;  // The client can't take more tasks
+                revert("client can't take more tasks");
             }
         }
         revert("Client not found");

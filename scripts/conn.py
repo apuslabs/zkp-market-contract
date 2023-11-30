@@ -12,6 +12,12 @@ market_contract = web3.eth.contract(address=market_contract_address, abi=market_
 apus_task_contract = web3.eth.contract(address=apus_task_address, abi=apus_task_abi)
 
 
+def token_approve(user, token_address, to, amount):
+    token_contract = web3.eth.contract(address=token_address, abi=token_abi)
+    tx = transaction(user, token_contract.functions.approve(to, amount))
+    return tx
+
+
 def get_nonce(address):
     return web3.eth.get_transaction_count(address)
 
@@ -30,4 +36,4 @@ def transaction(addr, func, **kwargs):
     tx_hash = web3.eth.send_raw_transaction(signed_txn.rawTransaction)
     return web3.eth.wait_for_transaction_receipt(tx_hash)
 
-__all__ = ['market_contract', 'apus_task_contract', 'transaction', 'web3']
+__all__ = ['market_contract', 'apus_task_contract', 'transaction', 'web3', 'apus_task_address', 'token_approve']

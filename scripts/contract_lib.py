@@ -52,6 +52,18 @@ class ContractLib:
         tx_hash2 = transaction(user, apus_task_contract.functions.submitTask(0, task_id, b"8b6ffb96d2377872afd4998fb8329183abb8a321bde906059c8fa4643040728a"))
         return tx_hash2
 
+    def reward_task(self, user, tid, token_address, value):
+        value = int(value * 10 ** 18)
+        f = apus_task_contract.functions
+        values = dict(value=value)
+        if token_address != none_address:
+            print("--------approve-----------")
+            print(token_approve(user, token_address, apus_task_address, value)['status'])
+
+        f = f.rewardTask(int(tid), value, token_address)
+        tx_hash2 = transaction(user, f, **values)
+        return tx_hash2
+
     def market_dispatch(self, user, addr, cid):
         return transaction(user, market_contract.functions.dispatchTaskToClient(addr, cid))
 
@@ -73,7 +85,7 @@ def creat_client_2():
 
 def create_client():
     # provider 0xC2600C80Beb521CC4E2f1b40B9D169c46E391390
-    client_config = gen_client_config(role.provider.public_key, 11, 'http://3.235.67.158:9000', 1, 10)
+    client_config = gen_client_config('0x28E1E8fAE8dC002478394f8C7e2b2458E63D5605', 11, 'http://3.235.67.158:9000', 1, 10)
 
     print("-" * 10, "加入market client", "-" * 10)
     tx = connector.join_market(role.provider, client_config)
@@ -84,7 +96,7 @@ def create_client():
     print(result)
 
 
-task_id = 1273181
+task_id = 1344635
 
 
 def post_task():
@@ -110,6 +122,14 @@ def submit_task():
     tx = connector.submit_task(role.provider, task_id)
     print(tx['status'])
 
+
+def reward_task(tid, token_address, amount):
+    print("-" * 10, "奖励任务", "-" * 10)
+    tx = connector.reward_task(role.provider, tid, token_address, amount)
+    print(tx)
+    print(tx['status'])
+
+
 def get_client_config():
     print("-" * 10, "获取client配置", "-" * 10)
     task, _ = connector.get_task(task_id)
@@ -129,25 +149,32 @@ def auto_init():
 
 
 if __name__ == '__main__':
+    task_id = 1
     # auto_init()
     # print(connector.market_dispatch(role.provider, '0x0000000000000000000000000000000000000000', 0)['status'])
-    # create_client()
+    create_client()
+    post_task()
+    dispatch_task()
+    submit_task()
+    # reward_task(1, none_address, 1.5)
+    reward_task(task_id, '0x5A0c49a80Df506d46BF7A5F46d9339e9779e9664', 1.5)
     # creat_client_2()
     # print(connector.market_dispatch(role.provider, '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390', 170073054677)['status'])
     # print(connector.has_resource())
-    # submit_task()
     # v = connector.get_task_by_index(43)
     # print(v)
     for index, i in enumerate(range(100000)):
         try:
             v = connector.get_task_by_index(i)
-            print(index, ":", v[2], v[1], v[6])
+            print(index, ":", v[0], v[2], v[1], v[6])
+            # print(index, ":", v)
         except:
             break
-    # print(connector.getLowestN())
+    try:
+        print(connector.getLowestN())
+    except Exception as e:
+        print(e)
     # get_task()
-    # dispatch_task()
     # get_task()
     # get_client_config()
-    # submit_task()
     # get_task()

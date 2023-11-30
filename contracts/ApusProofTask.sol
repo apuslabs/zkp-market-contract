@@ -5,6 +5,7 @@ import "./market.sol";
 import "./token.sol";
 
 import "./ApusData.sol";
+import "./console.sol";
 
 contract ApusProofTask {
 
@@ -108,6 +109,18 @@ contract ApusProofTask {
         return clientTasks;
     }
 
+    function slashTask (ApusData.TaskType _tp, uint256 uniqID) public {
+        for (uint256 i = 0; i < tasks.length; i++) {
+            if (tasks[i]._tp ==  _tp && tasks[i].uniqID == uniqID) {
+                require(tasks[i]._stat == ApusData.TaskStatus.Assigned);
+                tasks[i]._stat = ApusData.TaskStatus.Slashed;
+                // tasks[i].proveTime = block.timestamp;
+                // market.getProverConfig(tasks[i].assigner, tasks[i].clientId);
+                market.releaseTaskToClient(tasks[i].assigner, tasks[i].clientId);
+                return ;
+            }
+        }
+    }
     function submitTask(ApusData.TaskType _tp, uint256 uniqID, bytes calldata result) public {
         for (uint256 i = 0; i < tasks.length; i++) {
             if (tasks[i]._tp ==  _tp && tasks[i].uniqID == uniqID) {
@@ -115,9 +128,8 @@ contract ApusProofTask {
                 tasks[i]._stat = ApusData.TaskStatus.Done;
                 tasks[i].result = result;
                 tasks[i].proveTime = block.timestamp;
-                market.getProverConfig(tasks[i].assigner, tasks[i].clientId);
+                // market.getProverConfig(tasks[i].assigner, tasks[i].clientId);
                 market.releaseTaskToClient(tasks[i].assigner, tasks[i].clientId);
-                token.reward(tasks[i].assigner);
                 return ;
             }
         }
@@ -167,6 +179,26 @@ contract ApusProofTask {
                 }
             }
         }
+    }
+
+    function rewardTask(uint256 _taskID, uint256 amount, address _tokenAddress) public payable {
+        require(tasks[_taskID - 1]._stat == ApusData.TaskStatus.Done);
+        tasks[_taskID - 1]._stat = ApusData.TaskStatus.Payed;
+        tasks[_taskID - 1].reward.token = _tokenAddress;
+        tasks[_taskID - 1].reward.amount = amount;
+
+        if (_tokenAddress == address(0)) {
+            require(msg.value == amount);
+            payable(tasks[_taskID - 1].assigner).transfer(msg.value);
+        } else {
+            ERC20 _token = ERC20(_tokenAddress);
+            console.log(_tokenAddress, amount);
+            _token.transferFrom(msg.sender, address(this), amount);
+            _token.transfer(payable(tasks[_taskID - 1].assigner), amount);
+            console.log(_tokenAddress, amount, "done");
+        }
+        
+        token.reward(tasks[_taskID - 1].assigner);
     }
 
     function assignTask(uint256 taskID) public {
