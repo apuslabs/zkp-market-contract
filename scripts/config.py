@@ -37,19 +37,19 @@ public_to_private_keys = {
 # chain_id = 534351
 
 # Taiko Jolnir
-# url = 'https://rpc.jolnir.taiko.xyz'
-# chain_id = 167007
-#
-#
-# public_to_private_keys = {
-#     '0x863c9b8159B3F95687a600B1b21aE159618b31b1': '082994a2939818f4d539c7704cdd64a8ba20caf326b2cf731db5b2249c18c985'
-# }
+url = 'https://rpc.jolnir.taiko.xyz'
+chain_id = 167007
+
+
+public_to_private_keys = {
+    '0x863c9b8159B3F95687a600B1b21aE159618b31b1': '082994a2939818f4d539c7704cdd64a8ba20caf326b2cf731db5b2249c18c985'
+}
 
 
 class _role:
-    _contract_owner = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
-    _provider = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
-    _user = '0x69CEa2D018195c23C71C52DACf986b5d43fFD574'
+    _contract_owner = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
+    _provider = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
+    _user = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
 
     @classmethod
     def private_key(cls, public_key):

@@ -35,6 +35,11 @@ class ContractLib:
     def getProverConfig(self, addr, cid):
         return market_contract.functions.getProverConfig(addr, cid).call()
 
+    def close_prover_client(self, prover, client_id, addr):
+
+        tx_hash = transaction(prover, market_contract.functions.offlineClient(addr, client_id))
+        return tx_hash
+
     def post_task(self, user, uniq_id):
         return transaction(user, apus_task_contract.functions.postTask(0, uniq_id, b"hello world! input", int(time.time()) + 90 * 60, dict(token=none_address, amount=10)))
 
@@ -130,9 +135,11 @@ def reward_task(tid, token_address, amount):
     print(tx['status'])
 
 
-def get_client_config():
-    print("-" * 10, "获取client配置", "-" * 10)
-    task, _ = connector.get_task(task_id)
+def get_client_config(tid=None):
+    if tid is None:
+        tid = task_id
+    # print("-" * 10, "获取client配置", "-" * 10)
+    task, _ = connector.get_task(tid)
     result = connector.getProverConfig(task[3], task[1])
     print(result)
 
@@ -149,24 +156,30 @@ def auto_init():
 
 
 if __name__ == '__main__':
-    task_id = 1
+    task_id = 1486665
     # auto_init()
     # print(connector.market_dispatch(role.provider, '0x0000000000000000000000000000000000000000', 0)['status'])
-    create_client()
-    post_task()
-    dispatch_task()
-    submit_task()
-    # reward_task(1, none_address, 1.5)
-    reward_task(task_id, '0x5A0c49a80Df506d46BF7A5F46d9339e9779e9664', 1.5)
+    # create_client()
     # creat_client_2()
+    # print(connector.close_prover_client(role.provider, 4186429080267159119, '0x0b149fD010A928151541ee7C2Ed8967a4e6ee78E')['status'])
+    # print(connector.close_prover_client(role.provider, 15100104634522091724, '0xD5983fA7535D83124E4c72d0E24FD2CE4Ce65935,')['status'])
+    # print(connector.close_prover_client(role.provider, 5077798442797219816, '0xc95761B4D87A6b735c5c3128797CA35E7901507b')['status'])
+    # post_task()
+    # dispatch_task()
+    # submit_task()
+    # reward_task(2, none_address, 1.5)
+    # reward_task(task_id, '0x5A0c49a80Df506d46BF7A5F46d9339e9779e9664', 1.5)
     # print(connector.market_dispatch(role.provider, '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390', 170073054677)['status'])
     # print(connector.has_resource())
     # v = connector.get_task_by_index(43)
     # print(v)
     for index, i in enumerate(range(100000)):
+        i += 271
         try:
             v = connector.get_task_by_index(i)
-            print(index, ":", v[0], v[2], v[1], v[6])
+            # if v[6] in (3, 2, '3', '2'):
+            print(index, ":", v[0], v[2], v[3], v[6])
+            get_client_config(v[2])
             # print(index, ":", v)
         except:
             break
@@ -176,5 +189,4 @@ if __name__ == '__main__':
         print(e)
     # get_task()
     # get_task()
-    # get_client_config()
     # get_task()
