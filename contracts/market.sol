@@ -11,10 +11,16 @@ contract Market {
 
     ApusData.ClientConfig [] public clients;
 
+    function getClientLength() public view returns(uint256){
+        return clients.length;
+    }
+
     function getClientCount() public view returns(uint256){
         uint256 total = 0;
         for(uint i = 0; i < clients.length; i++) {
-            total += clients[i].maxZkEvmInstance;
+            if (clients[i].stat == ApusData.ClientStatus.Running) {
+                total += clients[i].maxZkEvmInstance;
+            }
         }
         return total;
     }
@@ -22,7 +28,7 @@ contract Market {
     function getAvilableClientCount() public view returns(uint256){
         uint256 count = 0;
         for(uint i = 0; i < clients.length; i++) {
-            if(clients[i].curInstance < clients[i].maxZkEvmInstance) {
+            if(clients[i].curInstance < clients[i].maxZkEvmInstance && clients[i].stat == ApusData.ClientStatus.Running) {
                 count += 1;
             }
         }

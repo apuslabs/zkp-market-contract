@@ -21,6 +21,9 @@ contract ApusProofTask {
         token = ERC20(_tokenAddr);
     }
 
+    function getTaskLength() public view returns(uint256){
+        return tasks.length;
+    }
 
     function getDailyTaskCount(uint numDays) public view returns (uint256[] memory) {
         require(numDays > 0, "Number of days must be greater than 0");
