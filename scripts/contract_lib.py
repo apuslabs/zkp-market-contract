@@ -50,6 +50,9 @@ class ContractLib:
     def get_task(self, block_id):
         return apus_task_contract.functions.getTask(0, block_id).call()
 
+    def get_client_by_index(self, index):
+        return market_contract.functions.clients(index).call()
+
     def get_task_by_index(self, index):
         return apus_task_contract.functions.tasks(index).call()
 
@@ -89,16 +92,27 @@ def creat_client_2():
     print(tx['status'])
 
 def create_client():
+    servers = [
+    #     ['0x863c9b8159B3F95687a600B1b21aE159618b31b1', 11, 'http://3.235.67.158:9000', 10, 1, 1, 1]
+    # , ['0x28E1E8fAE8dC002478394f8C7e2b2458E63D5605', 11, 'http://3.235.67.158:9000', 10, 1, 0, 1]
+    # , ['0xe8fa1Dc4d23c54C3C03fcF25EECa7E0Ff882a75e', 16060357654457774151, 'http://35.153.184.79:9000', 10, 1, 0, 1]
+    #  ['0xD36d8722F25ff182d95f6F8A64B5f915474C7534', 8423048318981194464, 'http://54.196.34.183:9000', 10, 1, 0, 1]
+    # ['0x74e2A876b86d7C345765d97D0E46FF9B84575F6a', 4049765301994061710, 'http://117.187.208.211:9000', 10, 1, 0, 1]
+    #  ['0x863c9b8159B3F95687a600B1b21aE159618b31b1', 14877645584739224750, 'http://117.187.208.213:9000', 10, 1, 0, 1]
+     # ['0x4DF42590c13b8110086A188b83a662DF0e6af1B8', 12994572626014186902, 'http://185.205.244.226:9000/', 10, 1, 0, 1]
+     ['0x74e2A876b86d7C345765d97D0E46FF9B84575F6a', 11261823312923665969, 'http://117.187.208.214:9000', 10, 1, 0, 1]]
+
     # provider 0xC2600C80Beb521CC4E2f1b40B9D169c46E391390
-    client_config = gen_client_config('0x28E1E8fAE8dC002478394f8C7e2b2458E63D5605', 11, 'http://3.235.67.158:9000', 1, 10)
+    for server in servers:
+        client_config = gen_client_config(server[0], server[1], server[2], 1, 10)
 
-    print("-" * 10, "加入market client", "-" * 10)
-    tx = connector.join_market(role.provider, client_config)
-    print(tx['status'])
+        print("-" * 10, "加入market client", "-" * 10)
+        tx = connector.join_market(role.provider, client_config)
+        print(tx['status'])
 
-    print("-" * 10, "获取价格最低client", "-" * 10)
-    result = connector.getLowestN()
-    print(result)
+        print("-" * 10, "获取价格最低client", "-" * 10)
+        result = connector.getLowestN()
+        print(result)
 
 
 task_id = 1344635
@@ -107,6 +121,7 @@ task_id = 1344635
 def post_task():
     print("-" * 10, "推送task", "-" * 10)
     tx = connector.post_task(role.provider, task_id)
+    print(tx)
     print(tx['status'])
 
 
@@ -116,15 +131,15 @@ def get_task():
     print(result)
 
 
-def dispatch_task():
+def dispatch_task(tid):
     print("-" * 10, "分配机器", "-" * 10)
-    tx = connector.dispatchTaskToClient(role.provider, task_id)
+    tx = connector.dispatchTaskToClient(role.provider, tid)
     print(tx['status'])
 
 
-def submit_task():
+def submit_task(tid):
     print("-" * 10, "提交任务", "-" * 10)
-    tx = connector.submit_task(role.provider, task_id)
+    tx = connector.submit_task(role.provider, tid)
     print(tx['status'])
 
 
@@ -156,33 +171,43 @@ def auto_init():
 
 
 if __name__ == '__main__':
-    task_id = 1486665
+    task_id = 22223333
     # auto_init()
     # print(connector.market_dispatch(role.provider, '0x0000000000000000000000000000000000000000', 0)['status'])
     # create_client()
     # creat_client_2()
-    # print(connector.close_prover_client(role.provider, 4186429080267159119, '0x0b149fD010A928151541ee7C2Ed8967a4e6ee78E')['status'])
-    # print(connector.close_prover_client(role.provider, 15100104634522091724, '0xD5983fA7535D83124E4c72d0E24FD2CE4Ce65935,')['status'])
-    # print(connector.close_prover_client(role.provider, 5077798442797219816, '0xc95761B4D87A6b735c5c3128797CA35E7901507b')['status'])
+    # print(connector.close_prover_client(role.provider, 129k94572626014186902, '0x4DF42590c13b8110086A188b83a662DF0e6af1B8')['status'])
+    # print(connector.has_resource())
     # post_task()
-    # dispatch_task()
-    # submit_task()
+    # dispatch_task(task_id)
+    # submit_task(task_id)
+    # submit_task(1730403)
+    # submit_task(1486673)
     # reward_task(2, none_address, 1.5)
     # reward_task(task_id, '0x5A0c49a80Df506d46BF7A5F46d9339e9779e9664', 1.5)
     # print(connector.market_dispatch(role.provider, '0xC2600C80Beb521CC4E2f1b40B9D169c46E391390', 170073054677)['status'])
     # print(connector.has_resource())
     # v = connector.get_task_by_index(43)
     # print(v)
+
     for index, i in enumerate(range(100000)):
-        i += 271
         try:
             v = connector.get_task_by_index(i)
-            # if v[6] in (3, 2, '3', '2'):
-            print(index, ":", v[0], v[2], v[3], v[6])
-            get_client_config(v[2])
-            # print(index, ":", v)
+            print(index, ":", v[0], v[1], v[2], v[3], v[6])
+        except Exception as e:
+            print(e)
+            break
+        time.sleep(1)
+
+    for i in range(100000):
+        try:
+            v = connector.get_client_by_index(i)
+            # print(v)
+            if v[6] in ('0', 0):
+                print(v)
         except:
             break
+
     try:
         print(connector.getLowestN())
     except Exception as e:
