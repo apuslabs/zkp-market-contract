@@ -4,24 +4,11 @@ import os
 import sys
 
 # Localhost
-url = 'http://1.117.58.173:8545'
+url = 'http://123.60.220.55:8545'
 chain_id = 1337
-gas_limit = 1000000  # 您可能需要根据合约函数的复杂性和资源消耗进行调整
-
-env = dict()
-with open(".env", "r") as file:
-    for line in file:
-        line = line.strip()
-        if line and not line.startswith("#"):
-            key, value = line.split("=")
-            env[key.strip()] = value.strip()
-
-url = env['APUS_RPC']
-chain_id = int(env['APUS_CHAIN_ID'])
-gas_limit = int(env['GAS_LIMIT'])
-
+gas_limit = 3000000 # 您可能需要根据合约函数的复杂性和资源消耗进行调整
 public_to_private_keys = {
-    '0x69CEa2D018195c23C71C52DACf986b5d43fFD574' :'9ce6e45a8a38a7c9b5faecbffdcb463a86817d26be2a3f3d9bed339eebf058a3'
+    '0xD8f818a8680C0A1ba80Df6A4a0Dfcd9b35466715' :'0xc1226cc783efedaea3eb7a35cf56e76a4ff1d49d1760130919b8540c82ac6db1'
 }
 
 # # Sepolia
@@ -39,17 +26,15 @@ public_to_private_keys = {
 # Taiko Jolnir
 url = 'https://rpc.jolnir.taiko.xyz'
 chain_id = 167007
-
-
 public_to_private_keys = {
-    '0x863c9b8159B3F95687a600B1b21aE159618b31b1': '082994a2939818f4d539c7704cdd64a8ba20caf326b2cf731db5b2249c18c985'
+    '0xD275E84eb1967f6DA2c475BbA1D312775ECEC21C' :'54bc1f7294e6378af87c8cb734ee98d516e450ac7259002a9c72faff569ef94c'
 }
 
 
 class _role:
-    _contract_owner = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
-    _provider = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
-    _user = '0x863c9b8159B3F95687a600B1b21aE159618b31b1'
+    _contract_owner = '0xD275E84eb1967f6DA2c475BbA1D312775ECEC21C'
+    _provider = '0xD275E84eb1967f6DA2c475BbA1D312775ECEC21C'
+    _user = '0xD275E84eb1967f6DA2c475BbA1D312775ECEC21C'
 
     @classmethod
     def private_key(cls, public_key):
@@ -76,9 +61,9 @@ def get_config(fileName):
 
 market_contract_address, market_abi = get_config("Market.json")
 apus_task_address, apus_task_abi = get_config('ApusProofTask.json')
-token_address, token_abi = get_config('ERC20.json')
+token_abi = json.load(open(os.path.join(os.getcwd(), "build/contracts", 'ERC20.json')))['abi']
 print("market address", market_contract_address)
-print("task_address", apus_task_address)
+
 # market_contract_address = env['APUS_TASK_CONTRACT_ADDRESS']
 
 __all__ = ['role', 'url', 'chain_id', 'gas_limit', 'market_contract_address', 'market_abi', 'apus_task_address', 'apus_task_abi', 'token_abi']

@@ -2,7 +2,7 @@
 // Abstract contract for the full ERC 20 Token standard
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
 pragma solidity ^0.8.20;
-import "./console.sol";
+// import "./console.sol";
 
 
 contract ERC20 {
@@ -37,9 +37,9 @@ contract ERC20 {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
-        console.log("fuck_transfer", _to);
-        console.log("fuck_transfer", msg.sender);
-        console.log("fuck_transfer", balances[msg.sender]);
+        // console.log("fuck_transfer", _to);
+        // console.log("fuck_transfer", msg.sender);
+        // console.log("fuck_transfer", balances[msg.sender]);
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -49,19 +49,19 @@ contract ERC20 {
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         uint256 _allowance = allowed[_from][msg.sender];
-        console.log("fuck transferFrom", "1", balances[_from]);
-        console.log("fuck transferFrom", "from", _from);
-        console.log("fuck transferFrom", "to", _to);
-        console.log("fuck transferFrom", _allowance , _value);
+        // console.log("fuck transferFrom", "1", balances[_from]);
+        // console.log("fuck transferFrom", "from", _from);
+        // console.log("fuck transferFrom", "to", _to);
+        // console.log("fuck transferFrom", _allowance , _value);
         require(balances[_from] >= _value && _allowance >= _value);
-        console.log("fuck transferFrom", "2");
+        // console.log("fuck transferFrom", "2");
         balances[_to] += _value;
         balances[_from] -= _value;
-        console.log("fuck transferFrom", "3");
+        // console.log("fuck transferFrom", "3");
         if (_allowance < MAX_UINT256) {
             allowed[_from][msg.sender] -= _value;
         }
-        console.log("fuck transferFrom", "4");
+        // console.log("fuck transferFrom", "4");
         emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         return true;
     }
@@ -71,9 +71,9 @@ contract ERC20 {
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
-        console.log("fuck approve", _spender);
-        console.log("fuck approve", msg.sender);
-        console.log("fuck approve", _value);
+        // console.log("fuck approve", _spender);
+        // console.log("fuck approve", msg.sender);
+        // console.log("fuck approve", _value);
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;

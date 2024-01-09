@@ -1,0 +1,398 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "clients",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minFee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "maxZkEvmInstance",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "curInstance",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum ApusData.ClientStatus",
+          "name": "stat",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "getClientCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "getAvilableClientCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "getUserClients",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxZkEvmInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "curInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.ClientStatus",
+              "name": "stat",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct ApusData.ClientConfig[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_as",
+          "type": "address"
+        }
+      ],
+      "name": "setTask",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxZkEvmInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "curInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.ClientStatus",
+              "name": "stat",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct ApusData.ClientConfig",
+          "name": "cf",
+          "type": "tuple"
+        }
+      ],
+      "name": "joinMarket",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLowestN",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxZkEvmInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "curInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.ClientStatus",
+              "name": "stat",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct ApusData.ClientConfig",
+          "name": "cf",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProverConfig",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxZkEvmInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "curInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.ClientStatus",
+              "name": "stat",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct ApusData.ClientConfig",
+          "name": "cf",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientID",
+          "type": "uint256"
+        }
+      ],
+      "name": "dispatchTaskToClient",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientID",
+          "type": "uint256"
+        }
+      ],
+      "name": "releaseTaskToClient",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientID",
+          "type": "uint256"
+        }
+      ],
+      "name": "offlineClient",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketCapacity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ]

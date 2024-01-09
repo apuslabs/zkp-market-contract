@@ -1,0 +1,732 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_marketAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_tokenAddr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        }
+      ],
+      "name": "dispatchTaskToClient",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "taskType",
+          "type": "uint8"
+        }
+      ],
+      "name": "isTaskIndexExists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "market",
+      "outputs": [
+        {
+          "internalType": "contract Market",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "_tp",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint64",
+          "name": "expiry",
+          "type": "uint64"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ApusData.rewardInfo",
+          "name": "ri",
+          "type": "tuple"
+        }
+      ],
+      "name": "postTask",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_taskID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_tokenAddress",
+          "type": "address"
+        }
+      ],
+      "name": "rewardTask",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "taskType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTaskIndex",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "_tp",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        }
+      ],
+      "name": "slashTask",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "_tp",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "result",
+          "type": "bytes"
+        }
+      ],
+      "name": "submitTask",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "tasks",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "assigner",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "_tp",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum ApusData.TaskStatus",
+          "name": "_stat",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bytes",
+          "name": "result",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ApusData.rewardInfo",
+          "name": "reward",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint64",
+          "name": "expiry",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint256",
+          "name": "assignTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "proveTime",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "internalType": "contract ERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "numDays",
+          "type": "uint256"
+        }
+      ],
+      "name": "getDailyTaskCount",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTaskCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAssignedTaskCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLatestTaskId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAvgReward",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAvgProofTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "prover",
+          "type": "address"
+        }
+      ],
+      "name": "getProverTasks",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "clientId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "uniqID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "assigner",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "input",
+              "type": "bytes"
+            },
+            {
+              "internalType": "enum ApusData.TaskType",
+              "name": "_tp",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.TaskStatus",
+              "name": "_stat",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "result",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct ApusData.rewardInfo",
+              "name": "reward",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expiry",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assignTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proveTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ApusData.Task[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "prover",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "clientId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getClientTasks",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "clientId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "uniqID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "assigner",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "input",
+              "type": "bytes"
+            },
+            {
+              "internalType": "enum ApusData.TaskType",
+              "name": "_tp",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.TaskStatus",
+              "name": "_stat",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "result",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct ApusData.rewardInfo",
+              "name": "reward",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expiry",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assignTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proveTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ApusData.Task[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum ApusData.TaskType",
+          "name": "_tp",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "uniqID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTask",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "clientId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "uniqID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "assigner",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "input",
+              "type": "bytes"
+            },
+            {
+              "internalType": "enum ApusData.TaskType",
+              "name": "_tp",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.TaskStatus",
+              "name": "_stat",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "result",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "token",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct ApusData.rewardInfo",
+              "name": "reward",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expiry",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assignTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proveTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ApusData.Task",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxZkEvmInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "curInstance",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum ApusData.ClientStatus",
+              "name": "stat",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct ApusData.ClientConfig",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hasResource",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
